@@ -1,0 +1,23 @@
+version: '3.3'
+
+networks:
+  jenkins:
+
+volumes:
+  jenkins-data:    
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    restart: always
+    privileged: true
+    ports:
+      - 8181:8080
+      - 50000:50000
+    volumes:
+      - jenkins-data/:/var/jenkins_home
+    networks:
+      - jenkins
+    environment:
+      DOCKER_TLS_VERIFY: 0
+      # - DOCKER_HOST=tcp://jenkins:2376  
